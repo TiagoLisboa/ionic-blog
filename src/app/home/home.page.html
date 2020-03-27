@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
     <ion-title>
       Super Blog
@@ -18,7 +18,7 @@
     <small>Total de {{total}} posts</small>
     
 
-    <ion-card *ngFor="let post of (posts)">
+    <ion-card button *ngFor="let post of (posts)" (click)="openPost(post)">
       <img [src]="post.thumbnail" />
       <ion-card-header>
         <ion-card-title>{{ post.title }}</ion-card-title>

@@ -1,0 +1,19 @@
+<ion-header class="header">
+  <ion-toolbar>
+    <ion-icon button name="arrow-back" (click)="goBack()"></ion-icon>
+    <ion-title>{{ post.title }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <img [src]="post.thumbnail" />
+  <div class="container">
+    <small>
+       Escrito por {{ post.author }} em {{ post.date }}
+    </small>
+    <p>{{ post.abstract }}</p>
+    <div [innerHTML]="post.content"></div>
+
+  </div>
+
+</ion-content>
