@@ -8,17 +8,34 @@ import { Observable } from "rxjs";
   styleUrls: ["home.page.scss"],
 })
 export class HomePage implements OnInit {
-  posts: Observable<any>;
+  posts: Observable<Array<any>>;
+  page: number;
+  total: number;
 
-  constructor() {}
+  constructor() {
+    this.posts = [];
+    this.page = 1;
+    this.total = 0;
+  }
+
+  loadPosts(event) {
+    api.get("/posts.json").then((response) => {
+      if (this.total > 0 && this.posts.length === this.total)
+        event.target.disabled = true;
+
+      const fetchPosts = response.data.posts.map((post) => ({
+        ...post,
+        thumbnail: `http://localhost:3000${post.thumbnail.url}?page=${this.page}`,
+      }));
+
+      this.posts = [...this.posts, ...fetchPosts];
+      this.page += 1;
+      this.total = response.data.meta.count;
+      event.target.complete();
+    });
+  }
 
   ngOnInit() {
-    api.get("/posts.json").then((response) => {
-      this.posts = response.data.map((post) => ({
-        ...post,
-        thumbnail: `http://localhost:3000${post.thumbnail.url}`,
-      }));
-      console.log(this.posts);
-    });
+    this.loadPosts();
   }
 }

@@ -14,16 +14,24 @@
   <!-- </ion-header> -->
 
   <div id="container">
-    <strong>Posts</strong>
-   
+    <strong>Posts</strong> <br />
+    <small>Total de {{total}} posts</small>
+    
 
-        <ion-card *ngFor="let post of (posts)">
-          <img [src]="post.thumbnail" />
-          <ion-card-header>
-            <ion-card-title>{{ post.title }}</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>{{ post.abstract }}</ion-card-content>
-        </ion-card>
+    <ion-card *ngFor="let post of (posts)">
+      <img [src]="post.thumbnail" />
+      <ion-card-header>
+        <ion-card-title>{{ post.title }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>{{ post.abstract }}</ion-card-content>
+    </ion-card>
 
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadPosts($event)">
+      <ion-infinite-scroll-content
+        loadingSpinner="bubbles"
+        loadingText="Carregando novos posts..."
+      >
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
   </div>
 </ion-content>
