@@ -1,6 +1,8 @@
 {
   "name": "blog-app",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular",
   "id": "108287e3"
 }
