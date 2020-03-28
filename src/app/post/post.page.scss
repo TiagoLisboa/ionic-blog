@@ -1,5 +1,12 @@
 .header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   padding: 0 20px;
+}
+.header * {
+  flex: 1;
 }
 .container {
   padding: 20px 40px;
